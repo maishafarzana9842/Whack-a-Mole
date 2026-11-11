@@ -2,35 +2,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Whack-a-Mole</title>
+    <title>Whack-a-Mole Garden</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>WHACK-A-MOLE!</h1>
-    <p class="subtitle">Catch the sneaky little moles!</p>
+    <div class="garden">
 
-    <div class="info">
-    <div>SCORE: <span id="score">0</span></div>
-    <div>BEST: <span id="bestScore">0</span></div>
-    <div>TIME: <span id="time">30</span>s</div>
-</div>
+        <header>
+            <h1>WHACK-A-MOLE!</h1>
+            <p class="subtitle">Catch the sneaky little moles!</p>
+        </header>
 
-    <div class="game">
-        <div class="hole" onclick="hitMole(0)"><span>🐹</span></div>
-        <div class="hole" onclick="hitMole(1)"><span>🐹</span></div>
-        <div class="hole" onclick="hitMole(2)"><span>🐹</span></div>
-        <div class="hole" onclick="hitMole(3)"><span>🐹</span></div>
-        <div class="hole" onclick="hitMole(4)"><span>🐹</span></div>
-        <div class="hole" onclick="hitMole(5)"><span>🐹</span></div>
-        <div class="hole" onclick="hitMole(6)"><span>🐹</span></div>
-        <div class="hole" onclick="hitMole(7)"><span>🐹</span></div>
-        <div class="hole" onclick="hitMole(8)"><span>🐹</span></div>
+        <div class="info">
+            <div class="score-card">
+                <span>🏆 SCORE</span>
+                <strong id="score">0</strong>
+            </div>
+
+            <div class="score-card">
+                <span>⭐ BEST</span>
+                <strong id="bestScore">0</strong>
+            </div>
+
+            <div class="score-card">
+                <span>⏰ TIME</span>
+                <strong><span id="time">30</span>s</strong>
+            </div>
+        </div>
+
+        <div class="game">
+            <div class="hole" onclick="hitMole(0)"><span></span></div>
+            <div class="hole" onclick="hitMole(1)"><span></span></div>
+            <div class="hole" onclick="hitMole(2)"><span></span></div>
+            <div class="hole" onclick="hitMole(3)"><span></span></div>
+            <div class="hole" onclick="hitMole(4)"><span></span></div>
+            <div class="hole" onclick="hitMole(5)"><span></span></div>
+            <div class="hole" onclick="hitMole(6)"><span></span></div>
+            <div class="hole" onclick="hitMole(7)"><span></span></div>
+            <div class="hole" onclick="hitMole(8)"><span></span></div>
+        </div>
+
+        <h2 id="message">Ready to play?</h2>
+
+        <button id="startBtn" onclick="startGame()">
+            START GAME
+        </button>
+
+        <p class="footer">🌿 Happy Hunting! 🌿</p>
+
     </div>
-
-    <h2 id="message">Ready to play?</h2>
-
-    <button id="startBtn" onclick="startGame()">START GAME</button>
 
     <script src="script.js"></script>
 </body>
