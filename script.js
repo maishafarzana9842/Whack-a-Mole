@@ -3,11 +3,12 @@ let score = 0;
 let time = 30;
 let activeMole = -1;
 let gameRunning = false;
+let goldenMole = false;
 
 let moleTimer;
 let gameTimer;
 
-let moleSpeed = 850;
+let moleSpeed = 1300;
 
 let bestScore = Number(localStorage.getItem("bestScore")) || 0;
 
@@ -16,18 +17,34 @@ const holes = document.querySelectorAll(".hole");
 document.getElementById("bestScore").innerText = bestScore;
 
 function showMole() {
-    holes.forEach(hole => hole.classList.remove("active"));
+    holes.forEach(hole => {
+        hole.classList.remove("active", "golden");
+    });
 
-    activeMole = Math.floor(Math.random() * 9);
+    activeMole = Math.floor(Math.random() * holes.length);
+
+    goldenMole = Math.random() < 0.20;
 
     holes[activeMole].classList.add("active");
+
+    if (goldenMole) {
+        holes[activeMole].classList.add("golden");
+    }
 }
 
 function scheduleMole() {
+    clearTimeout(moleTimer);
+
     moleTimer = setTimeout(function() {
         if (!gameRunning) return;
 
-        moleSpeed = Math.max(350, 850 - Math.floor(score / 5) * 70);
+        holes[activeMole].classList.remove("active", "golden");
+        activeMole = -1;
+
+        moleSpeed = Math.max(
+            700,
+            1300 - Math.floor(score / 5) * 50
+        );
 
         showMole();
         scheduleMole();
@@ -36,27 +53,30 @@ function scheduleMole() {
 }
 
 function hitMole(index) {
-    if (!gameRunning) return;
+    if (!gameRunning || index !== activeMole) return;
 
-    if (index === activeMole) {
-        score++;
+    score += goldenMole ? 2 : 1;
 
-        document.getElementById("score").innerText = score;
+    document.getElementById("score").innerText = score;
 
-        if (score > bestScore) {
-            bestScore = score;
-            localStorage.setItem("bestScore", bestScore);
-            document.getElementById("bestScore").innerText = bestScore;
-        }
-
-        clearTimeout(moleTimer);
-
-        holes[index].classList.remove("active");
-        activeMole = -1;
-
-        showMole();
-        scheduleMole();
+    if (score > bestScore) {
+        bestScore = score;
+        localStorage.setItem("bestScore", bestScore);
+        document.getElementById("bestScore").innerText = bestScore;
     }
+
+    clearTimeout(moleTimer);
+
+    holes[activeMole].classList.remove("active", "golden");
+    activeMole = -1;
+
+    moleSpeed = Math.max(
+        700,
+        1300 - Math.floor(score / 5) * 50
+    );
+
+    showMole();
+    scheduleMole();
 }
 
 function startGame() {
@@ -65,7 +85,8 @@ function startGame() {
 
     score = 0;
     time = 30;
-    moleSpeed = 850;
+    moleSpeed = 1300;
+    goldenMole = false;
     gameRunning = true;
 
     document.getElementById("score").innerText = score;
@@ -95,7 +116,9 @@ function endGame() {
     clearTimeout(moleTimer);
     clearInterval(gameTimer);
 
-    holes.forEach(hole => hole.classList.remove("active"));
+    holes.forEach(hole => {
+        hole.classList.remove("active", "golden");
+    });
 
     activeMole = -1;
 
@@ -105,3 +128,10 @@ function endGame() {
     document.getElementById("startBtn").innerText = "PLAY AGAIN";
     document.getElementById("startBtn").disabled = false;
 }
+document.getElementById("startBtn").addEventListener("click", startGame);
+
+holes.forEach((hole, index) => {
+    hole.addEventListener("click", function() {
+        hitMole(index);
+    });
+});

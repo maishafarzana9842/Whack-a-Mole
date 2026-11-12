@@ -1,58 +1,80 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Whack-a-Mole Garden</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whack a Mole</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <div class="garden">
 
         <header>
-            <h1>WHACK-A-MOLE!</h1>
-            <p class="subtitle">Catch the sneaky little moles!</p>
+            <div class="wood-title">
+                <h1>Whack a Mole!</h1>
+                <p>Catch the mole before time runs out!</p>
+            </div>
         </header>
 
+        <!-- Scoreboard -->
+
         <div class="info">
+
             <div class="score-card">
-                <span>🏆 SCORE</span>
+                <span>SCORE</span>
                 <strong id="score">0</strong>
             </div>
 
             <div class="score-card">
-                <span>⭐ BEST</span>
-                <strong id="bestScore">0</strong>
+                <span>TIME</span>
+                <strong id="time">30</strong>
             </div>
 
             <div class="score-card">
-                <span>⏰ TIME</span>
-                <strong><span id="time">30</span>s</strong>
+                <span>BEST</span>
+                <strong id="bestScore">0</strong>
             </div>
+
         </div>
+
+        <!-- Game Board -->
 
         <div class="game">
-            <div class="hole" onclick="hitMole(0)"><span></span></div>
-            <div class="hole" onclick="hitMole(1)"><span></span></div>
-            <div class="hole" onclick="hitMole(2)"><span></span></div>
-            <div class="hole" onclick="hitMole(3)"><span></span></div>
-            <div class="hole" onclick="hitMole(4)"><span></span></div>
-            <div class="hole" onclick="hitMole(5)"><span></span></div>
-            <div class="hole" onclick="hitMole(6)"><span></span></div>
-            <div class="hole" onclick="hitMole(7)"><span></span></div>
-            <div class="hole" onclick="hitMole(8)"><span></span></div>
+
+            <div class="hole" id="hole0"><span></span></div>
+            <div class="hole" id="hole1"><span></span></div>
+            <div class="hole" id="hole2"><span></span></div>
+
+            <div class="hole" id="hole3"><span></span></div>
+            <div class="hole" id="hole4"><span></span></div>
+            <div class="hole" id="hole5"><span></span></div>
+
+            <div class="hole" id="hole6"><span></span></div>
+            <div class="hole" id="hole7"><span></span></div>
+            <div class="hole" id="hole8"><span></span></div>
+
         </div>
 
-        <h2 id="message">Ready to play?</h2>
+        <!-- Bottom Panel -->
 
-        <button id="startBtn" onclick="startGame()">
-            START GAME
-        </button>
+        <div class="bottom-area">
 
-        <p class="footer">🌿 Happy Hunting! 🌿</p>
+            <p id="message">Ready to play?</p>
+
+            <button id="startBtn">START GAME</button>
+
+        </div>
+
+        <div class="footer">
+            Made with ♥ | Whack a Mole
+        </div>
 
     </div>
 
     <script src="script.js"></script>
+
 </body>
 </html>
