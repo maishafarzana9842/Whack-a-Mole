@@ -301,3 +301,15 @@ h1 {
     .bottom-area { margin-top: 6px; padding: 8px; }
     .footer { margin-top: 5px; }
 }
+#pauseBtn {
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+#pauseBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
